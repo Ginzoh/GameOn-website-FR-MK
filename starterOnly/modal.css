@@ -195,7 +195,10 @@ main {
   font-size: 17px;
   color: red;
 }
-
+.modal2 {
+  background-color: #232323;
+  display: none;
+}
 label {
   font-family: var(--font-default);
   font-size: 17px;

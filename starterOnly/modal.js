@@ -23,9 +23,7 @@ let isNum = false;
 
 //check if a String is an email
 const isEmail = function (email) {
-  return /^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$/.test(
-    email
-  );
+  return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
 };
 
 // launch modal event
@@ -44,7 +42,7 @@ document.getElementById("last").addEventListener("keyup", checkLastName);
 document.getElementById("email").addEventListener("keyup", checkEmail);
 
 //checking the number given
-document.getElementById("quantity").addEventListener("keyup", checkNum);
+document.getElementById("quantity").addEventListener("input", checkNum);
 
 // launch modal form
 function launchModal() {
@@ -112,6 +110,7 @@ function validRadio() {
 
 //Check if the form is valid
 function validate() {
+  event.preventDefault();
   if (!validRadio()) {
     alert("Please check at least one radio button");
     return false;
@@ -120,9 +119,25 @@ function validate() {
     alert("Please accept the terms of service");
     return false;
   }
-  if (!firstNameBool || !LastNameBool || !emailBool || isNum) {
+  if (document.getElementById("birthdate").value === "") {
+    // alert("Please enter a birth date");
+    document.querySelector(".checkDate").style.display = "block";
+    return false;
+  } else {
+    document.querySelector(".checkDate").style.display = "none";
+  }
+  if (!firstNameBool || !LastNameBool || !emailBool) {
     alert("Please make sure your inputs match the fields");
     return false;
   }
+  if (!isNum) {
+    alert("Please enter a valid number of tourneys");
+    document.querySelector(".checkQuantity").style.display = "block";
+    return false;
+  }
+
+  document.querySelector(".bground").style.display = "none";
+  document.querySelector(".modal2").style.display = "block";
+
   return true;
 }
