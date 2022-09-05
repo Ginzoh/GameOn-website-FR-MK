@@ -8,10 +8,11 @@ function editNav() {
 }
 
 // DOM Elements
-const modalbg = document.querySelector(".bground");
+const modalbg = document.querySelector(".modal");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalClBtn = document.querySelector(".close");
+const modalConfCl = document.querySelector(".confirm-button");
 
 // Variables for testing
 
@@ -31,6 +32,10 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // close modal event
 modalClBtn.addEventListener("click", closeModal);
+
+// close modal after confirmation
+
+modalConfCl.addEventListener("click", closeModal);
 
 //checking the first name
 document.getElementById("first").addEventListener("keyup", checkFirstName);
@@ -126,18 +131,28 @@ function validate() {
   } else {
     document.querySelector(".checkDate").style.display = "none";
   }
-  if (!firstNameBool || !LastNameBool || !emailBool) {
-    alert("Please make sure your inputs match the fields");
+  if (!emailBool) {
+    alert("Please enter a valid email");
     return false;
   }
+  if (!firstNameBool) {
+    alert("Please enter a valid first name");
+    return false;
+  }
+
+  if (!LastNameBool) {
+    alert("Please enter a valid last name");
+    return false;
+  }
+
   if (!isNum) {
     alert("Please enter a valid number of tourneys");
     document.querySelector(".checkQuantity").style.display = "block";
     return false;
   }
 
-  document.querySelector(".bground").style.display = "none";
-  document.querySelector(".modal2").style.display = "block";
+  document.querySelector(".modal-cl").style.display = "none";
+  document.querySelector(".modal-confirm").style.display = "block";
 
   return true;
 }
