@@ -161,9 +161,11 @@ main {
 }
 
 .merci {
-  padding: 8.5vw;
+  padding: 137.5px;
   text-align: center;
   margin: 90px 0;
+  padding-right: 108px;
+  padding-left: 96px;
 }
 
 .button:hover {

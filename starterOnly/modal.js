@@ -52,6 +52,8 @@ document.getElementById("quantity").addEventListener("input", checkNum);
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  document.querySelector(".modal-cl").style.display = "block";
+  document.querySelector(".modal-confirm").style.display = "none";
 }
 
 // close modal form
